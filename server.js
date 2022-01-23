@@ -21,22 +21,25 @@ app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
 
 app.post('/upload-image', upload.single('profile-file'), async function (req, res, next) {
-  // req.file is the `profile-file` file
-  // req.body will hold the text fields, if there were any
-  //console.log(JSON.stringify(req.file));
   let image = sizeOf(req.file.path);
   image.path = req.file.path;
-  let data = await getAnnotations(req.file.path);
-  let rects = data.map(a => ({
+  console.log('saved', image);
+  let anns = await getAnnotations(req.file.path);
+  let raw = anns.map(a => ({
     name: a.name,
     score: a.score,
-    offset: {
-      x: Math.round(a.boundingPoly.normalizedVertices[0].x* image.width),
-      y: Math.round(a.boundingPoly.normalizedVertices[0].y* image.height)
-    },
-    points: (a.boundingPoly.normalizedVertices.reduce(
-      (acc, v) => acc + Math.round(v.x * image.width)
-        + ',' + Math.round(v.y * image.height) + ' ', '')).trim()
+    verts: a.boundingPoly.normalizedVertices.map(v => ({
+      x: Math.round(v.x * image.width),
+      y: Math.round(v.y * image.height)
+    }))
+  }));
+  let rects =raw.map(r => ({
+      name: r.name,
+      score: r.score,
+      x: r.verts[0].x,
+      y: r.verts[0].y,
+      width: r.verts[1].x-r.verts[0].x,
+      height: r.verts[2].y-r.verts[1].y
   }));
   res.render('index', { rects, image });
 });
