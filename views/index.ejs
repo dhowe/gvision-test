@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles.css" />
+  <title>Index</title>
+  <style>
+    #mysvg {
+      background: #fff;
+      vertical-align: top;
+    }
+  </style>
+</head>
+
+<body>
+  <!--%= JSON.stringify(rects) %><br-->
+  <svg id="mysvg" width="<%= image.width %>" height="<%= image.height %>">
+    <g id="centreMe">
+      <image href="<%= image.path %>" x="0" y="0" width="100%" height="100%" />
+      <% for (let i=0; i < rects.length; i++) { %>
+        <polygon points="<%= rects[i].points %>" style="fill:none; stroke-width: 2px; stroke:rgb(0,255,0)" />
+        <rect x="<%= rects[i].offset.x %>" y="<%= rects[i].offset.y %>" fill="rgb(0,255,0)" width="<%= image.width %>" height="15"/>
+        <text fill="#000" x="<%= rects[i].offset.x +5 %>" y="<%= rects[i].offset.y+15 %>" font-size="12"
+          font-family="verdana">
+          <%= rects[i].name %> <%= Math.round(rects[i].score * 100)+"%" %>
+        </text>
+
+        <% } %>
+    </g>
+  </svg>
+
+
+  <!-- <svg>
+      <g>
+        <image href="<%= image.path %>" width="<%= image.width %>" height="<%= image.height %>" /><br>
+        <% for (let i=0; i < rects.length; i++) { %>
+          <polygon points="<%= rects[i].points %>" style="fill:none; stroke:rgb(0,0,255)" /><br>
+        <% } %>
+      </g>
+      </svg> -->
+</body>
+
+</html>
