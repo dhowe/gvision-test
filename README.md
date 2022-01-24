@@ -6,6 +6,7 @@ $ cd gvision-test
 $ npm install
 $ npm start
 ```
-`then visit localhost:3000 in browser`
+
+<pre>then visit localhost:3000 in browser
 
 
