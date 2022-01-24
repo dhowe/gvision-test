@@ -1,1 +1,9 @@
-<h1 align = 'center'>gvision test</h1>
+## gvision test
+
+```sh
+$ git clone https://github.com/dhowe/gvision-test.git
+$ cd gvision-test
+$ npm install
+$ npm start
+```
+
