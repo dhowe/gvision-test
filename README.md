@@ -10,7 +10,7 @@ $ npm start
 
 then visit http://localhost:3000 in browser
 
-<em>note: this server will not work without a valid json credentials file</em>
+<em>Note: analysis will not work without a valid json credentials file</em>
 
 
 
