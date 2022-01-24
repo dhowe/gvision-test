@@ -8,9 +8,9 @@ $ npm install
 $ npm start
 ```
 
-<pre>then visit http://localhost:3000 in browser
+then visit http://localhost:3000 in browser
 
-<em>note: this server will not work without a valid json credentials file</em></pre>
+<em>note: this server will not work without a valid json credentials file</em>
 
 
 
